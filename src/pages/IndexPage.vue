@@ -13,67 +13,87 @@
 
     <q-page-container>
       <router-view />
-      <div class="fit row wrap justify-center items-center content-start">
-        <q-select
-          v-model="inputLanguage"
-          clearable
-          use-input
-          input-debounce="0"
-          label="Language"
-          :options="languages"
-          @filter="filterFn"
-          color="orange"
-          style="width: 250px"
-          behavior="menu"
-        />
-        <q-btn
-          push
-          color="orange"
-          round
-          icon="autorenew"
-          class="offset-1"
-          @click="switchLanguage"
-        />
-        <q-select
-          v-model="outputLanguage"
-          clearable
-          use-input
-          input-debounce="0"
-          label="Language"
-          :options="languages"
-          @filter="filterFn"
-          color="orange"
-          style="width: 250px"
-          behavior="menu"
-          class="col-4 offset-1"
-        />
-      </div>
-      <div class="fit row wrap justify-center content-start">
-        <q-input
-          autogrow
-          outlined
-          clearable
-          use-input
-          input-debounce="0"
-          color="orange"
-          v-model="input"
-          type="textarea"
-          label="Text"
-          class="col-4"
-          style="overflow: auto"
-          clear-icon="close"
-        />
-        <q-input
-          autogrow
-          outlined
-          disabled
-          color="orange"
-          v-model="output"
-          type="textarea"
-          label="Translation"
-          class="col-4 offset-1"
-          style="overflow: auto"
-        />
+      <div class="row justify-center">
+        <div class="col col-4">
+          <div class="row wrap content-start">
+            <q-btn-toggle
+              v-model="model"
+              spread
+              flat
+              toggle-color="orange"
+              color="white"
+              text-color="black"
+              :options="[
+                { label: 'Option 1', value: 'one' },
+                { label: 'Option 2', value: 'two' },
+                { label: 'Option 3', value: 'three' },
+              ]"
+            />
+            <q-select
+              v-model="inputLanguage"
+              clearable
+              use-input
+              input-debounce="0"
+              label="Language"
+              :options="languages"
+              @filter="filterFn"
+              color="orange"
+              behavior="menu"
+            />
+          </div>
+          <q-input
+            autogrow
+            outlined
+            clearable
+            use-input
+            input-debounce="0"
+            color="orange"
+            v-model="input"
+            type="textarea"
+            label="Text"
+            class="col-4"
+            style="overflow: auto"
+            clear-icon="close"
+          />
+        </div>
+        <div
+          class="row col-1 justify-center items-center"
+          style="min-height: 4em; max-height: 4em"
+        >
+          <q-btn
+            push
+            color="green"
+            round
+            icon="autorenew"
+            @click="switchLanguage"
+          />
+        </div>
+        <div class="col col-4">
+          <q-select
+            v-model="outputLanguage"
+            clearable
+            use-input
+            input-debounce="0"
+            label="Language"
+            :options="languages"
+            @filter="filterFn"
+            color="orange"
+            style="width: 250px"
+            behavior="menu"
+            class="col-4 offset-1"
+          />
+          <q-input
+            autogrow
+            outlined
+            disabled
+            color="orange"
+            v-model="output"
+            type="textarea"
+            label="Translation"
+            class="col-4 offset-1"
+            style="overflow: auto"
+          />
+        </div>
       </div>
       <p></p>
       <div class="fit row wrap justify-center content-start">
@@ -99,6 +119,7 @@ export default {
       inputLanguage: ref("Russian"),
       outputLanguage: ref("English"),
       languagesAll: [],
+      model: ref("one"),
     };
   },
   data() {
