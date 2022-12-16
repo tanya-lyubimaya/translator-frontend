@@ -15,22 +15,11 @@
       <router-view />
       <div class="row justify-center">
         <div class="col col-4">
-          <div class="row wrap content-start">
-            <q-btn-toggle
-              v-model="model"
-              spread
-              flat
-              toggle-color="orange"
-              color="white"
-              text-color="black"
-              :options="[
-                { label: 'Option 1', value: 'one' },
-                { label: 'Option 2', value: 'two' },
-                { label: 'Option 3', value: 'three' },
-              ]"
-            />
+          <div class="row wrap content-start justify-end">
             <q-select
               v-model="inputLanguage"
+              autofocus="true"
+              borderless
               clearable
               use-input
               input-debounce="0"
@@ -50,6 +39,7 @@
             color="orange"
             v-model="input"
             type="textarea"
+            rows="10"
             label="Text"
             class="col-4"
             style="overflow: auto"
@@ -71,6 +61,7 @@
         <div class="col col-4">
           <q-select
             v-model="outputLanguage"
+            borderless
             clearable
             use-input
             input-debounce="0"
@@ -123,7 +114,7 @@ export default {
     };
   },
   data() {
-    return { input: "", languages: [] };
+    return { input: "", languages: [], minRows: 10 };
   },
   created() {
     const path = "http://localhost:8080/get-languages";
